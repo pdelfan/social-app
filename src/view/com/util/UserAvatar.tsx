@@ -200,7 +200,7 @@ export function UserAvatar({
               name: 'trash',
             },
             android: 'ic_delete',
-            web: 'trash',
+            web: ['far', 'trash-can'],
           },
           onPress: async () => {
             onSelectNewAvatar?.(null)
