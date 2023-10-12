@@ -117,10 +117,7 @@ const desktopStyles = StyleSheet.create({
 
 const mobileStyles = StyleSheet.create({
   outer: {
-    flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'transparent',
-    maxWidth: '100%',
   },
   contentContainer: {
     columnGap: isWeb ? 0 : 20,
