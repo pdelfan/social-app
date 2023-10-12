@@ -1,9 +1,10 @@
-import React, {useMemo} from 'react'
+import React from 'react'
 import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native'
 import {observer} from 'mobx-react-lite'
 import {TabBar} from 'view/com/pager/TabBar'
 import {RenderTabBarFnProps} from 'view/com/pager/Pager'
 import {useStores} from 'state/index'
+import {useHomeTabs} from 'lib/hooks/useHomeTabs'
 import {usePalette} from 'lib/hooks/usePalette'
 import {useAnimatedValue} from 'lib/hooks/useAnimatedValue'
 import {useColorSchemeStyle} from 'lib/hooks/useColorSchemeStyle'
@@ -20,6 +21,7 @@ export const FeedsTabBar = observer(function FeedsTabBarImpl(
   const store = useStores()
   const pal = usePalette('default')
   const interp = useAnimatedValue(0)
+  const items = useHomeTabs(store.preferences.pinnedFeeds)
 
   React.useEffect(() => {
     Animated.timing(interp, {
@@ -38,11 +40,6 @@ export const FeedsTabBar = observer(function FeedsTabBarImpl(
   const onPressAvi = React.useCallback(() => {
     store.shell.openDrawer()
   }, [store])
-
-  const items = useMemo(
-    () => ['Following', ...store.me.savedFeeds.pinnedFeedNames],
-    [store.me.savedFeeds.pinnedFeedNames],
-  )
 
   return (
     <Animated.View style={[pal.view, pal.border, styles.tabBar, transform]}>
